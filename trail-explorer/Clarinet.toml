@@ -1,21 +1,61 @@
 [project]
-name = "trail-explorer"
-description = ""
-authors = []
-telemetry = true
-cache_dir = "./.cache"
+name = "fitness-trail-explorer"
+version = "2.0.0"
+description = "A decentralized fitness trail management system with user ratings and completion tracking"
+authors = ["midorichie <midorichie@example.com>"]
+license = "MIT"
+keywords = ["fitness", "trails", "stacks", "clarity"]
 
-# [contracts.counter]
-# path = "contracts/counter.clar"
+[contracts.fitness-trail-explorer]
+path = "contracts/fitness-trail-explorer.clar"
+clarity_version = 1
+
+[repl]
+costs_version = 1
+parser_version = 1
 
 [repl.analysis]
 passes = ["check_checker"]
-check_checker = { trusted_sender = false, trusted_caller = false, callee_filter = false }
 
-# Check-checker settings:
-# trusted_sender: if true, inputs are trusted after tx_sender has been checked.
-# trusted_caller: if true, inputs are trusted after contract-caller has been checked.
-# callee_filter: if true, untrusted data may be passed into a private function without a
-# warning, if it gets checked inside. This check will also propagate up to the
-# caller.
-# More informations: https://www.hiro.so/blog/new-safety-checks-in-clarinet
+[repl.analysis.check_checker]
+strict = true
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
+
+# Development network settings
+[devnet]
+disable_bitcoin_explorer = false
+working_dir = "tmp/devnet"
+bitcoin_node_p2p_port = 18444
+bitcoin_node_rpc_port = 18443
+bitcoin_node_username = "devnet"
+bitcoin_node_password = "devnet"
+bitcoin_controller_block_time = 30_000
+stacks_node_rpc_port = 20443
+stacks_node_p2p_port = 20444
+stacks_api_port = 3999
+stacks_api_events_port = 3700
+
+# Test configurations
+[[project.requirements]]
+contract_id = "SP000000000000000000002Q6VF78.bns"
+
+# Boot accounts for testing
+[[devnet.miner]]
+seed = "twice kind fence tip hidden tilt action fragile skin nothing glory cousin green tomorrow spring wrist shed math olympic multiply hip blue scout claw"
+bitcoin_address = "mqVnk6NPRdhntvfM4hh9vvjiRkFDUuSYsH"
+stacks_address = "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM"
+balance = 100_000_000_000_000
+
+[[devnet.miner]]  
+seed = "sell invite acquire kitten bamboo drastic jelly vivid peace spawn twice guilt pave pen trash pretty park cube fragile unaware remain midnight betray rebuild"
+bitcoin_address = "mr1iPkD9N3RJZZxXRk7xF9d36gffa6exNC"
+stacks_address = "ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5"
+balance = 100_000_000_000_000
+
+[[devnet.miner]]
+seed = "hold excess usual excess ring elephant install account glad dry fragile donkey gaze humble truck breeze nation gasp vacuum limb head keep delay hospital"
+bitcoin_address = "muYdXKmX9bByAueDe6KFfHd5Ff1gdN9ErG"  
+stacks_address = "ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG"
+balance = 100_000_000_000_000
